@@ -44,10 +44,4 @@ public class Comparators {
                         with(new Sort(Sort.Direction.ASC, "price")),
                 ProductEntity.class);
     }
-
-//    public static void main(String[] args) {
-//        for (ProductEntity p : getProducts("")) {
-//            System.out.println(p.getPrice());
-//        }
-//    }
 }
