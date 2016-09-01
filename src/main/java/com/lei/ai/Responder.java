@@ -2,11 +2,16 @@ package com.lei.ai;
 
 import com.LanguageUtils.Classifier;
 import com.MongoEntities.LocationEntity;
+import com.MongoEntities.ProductEntity;
 import com.MongoEntities.TypeEntity;
 import com.lei.logic.Comparators;
 import com.lei.logic.Finder;
 import com.lei.logic.Locator;
 import com.utils.MessageTemplate;
+import com.utils.MongoTemplate;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.HashMap;
 import java.util.List;
@@ -50,44 +55,105 @@ public class Responder {
 
             } else if (Finder.findType(classfiedHashMap.get("NN")) != null) {
                 // locate the type
-                Locator.getLocationByType(Finder.findType(classfiedHashMap.get("NN")).getName());
+                LocationEntity location = Locator.getLocationByType(Finder.findType(classfiedHashMap.get("NN")).getName());
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "You can find " + Finder.findType(classfiedHashMap.get("NN")).getName() +
+                        " at " + location.getName();
+                msg.array.add(location);
+                msg.type = "location";
+                return msg;
             } else {
                 // error
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Ops! We could not find what you were looking for!";
+                msg.error = true;
+                return msg;
             }
 
         } else if (wrbAnalyzer(classfiedHashMap) && classfiedHashMap.get("WRB").contains("how")) {
             // price logic :: how much -> noun
             if (Finder.findProduct(classfiedHashMap.get("NN")) != null) {
                 // details of the product
-                Finder.findProduct(classfiedHashMap.get("NN"));
+                ProductEntity product = Finder.findProduct(classfiedHashMap.get("NN"));
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Product details: ";
+                msg.type = "product";
+                msg.array.add(product);
+                return msg;
             } else {
                 // error
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Ops! We could not find what you were looking for!";
+                msg.error = true;
+                return msg;
             }
         } else if (jjsAnalyzer(classfiedHashMap)) {
             if (classfiedHashMap.get("JJS").contains("cheapest") && Finder.findType(classfiedHashMap.get("NN")) != null) {
                 // cheapest by type
-                Comparators.getCheapest(Finder.findType(classfiedHashMap.get("NN")));
+                ProductEntity product = Comparators.getCheapest(Finder.findType(classfiedHashMap.get("NN")));
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Cheapest type of " + product.getTypeEntity().getName() + " is ";
+                msg.type = "product";
+                msg.array.add(product);
+                return msg;
             } else {
                 // error
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Ops! We could not find what you were looking for!";
+                msg.error = true;
+                return msg;
             }
         } else if (jjjjrAnalyzer(classfiedHashMap)) {
+            // cheap cheaper expensive etc
             if (Finder.findType(classfiedHashMap.get("NN")) != null) {
-                Comparators.getProducts(Finder.findType(classfiedHashMap.get("NN")).getName());
+                List<ProductEntity> productEntities = Comparators.getProducts(Finder.findType(classfiedHashMap.get("NN")).getName());
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Details of " + Finder.findType(classfiedHashMap.get("NN")).getName() + " products are as follows";
+                msg.type = "products";
+                for (ProductEntity productEntity : productEntities) {
+                    msg.array.add(productEntity);
+                }
+                return msg;
             } else {
                 // error
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Ops! We could not find what you were looking for!";
+                msg.error = true;
+                return msg;
             }
         } else if (nounAnalyzer(classfiedHashMap)) {
+            MongoOperations ops = MongoTemplate.getOperator();
             if (Finder.findType(classfiedHashMap.get("NN")) != null) {
-                Comparators.getProducts(Finder.findType(classfiedHashMap.get("NN")).getName());
+                TypeEntity typeEntity = Finder.findType(classfiedHashMap.get("NN"));
+                List<ProductEntity> productEntities = ops.find(Query.query(Criteria.where("typeEntity").is(typeEntity)),ProductEntity.class);
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Details of " + Finder.findType(classfiedHashMap.get("NN")).getName() + " products are as follows";
+                msg.type = "products";
+                for (ProductEntity productEntity : productEntities) {
+                    msg.array.add(productEntity);
+                }
+                return msg;
             } else if (Finder.findProduct(classfiedHashMap.get("NN")) != null) {
-                Comparators.getProduct(Finder.findProduct(classfiedHashMap.get("NN")).getName());
+                ProductEntity product = Comparators.getProduct(Finder.findProduct(classfiedHashMap.get("NN")).getName());
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Details of " + product + " :";
+                msg.type = "product";
+                msg.array.add(product);
+                return msg;
             } else {
                 // error
+                MessageTemplate msg = new MessageTemplate();
+                msg.message = "Ops! We could not find what you were looking for!";
+                msg.error = true;
+                return msg;
             }
         } else {
             // error
+            MessageTemplate msg = new MessageTemplate();
+            msg.message = "Ops! We could not find what you were looking for!";
+            msg.error = true;
+            return msg;
         }
-        return null;
     }
 
     /*

@@ -20,7 +20,7 @@ public class LeiAPI {
         Responder responder = Responder.getResponder();
         if (query == null || query.length() == 0) {
             MessageTemplate msg = new MessageTemplate();
-            msg.error = "INVALID ARGUMENT";
+            msg.error = true;
             return msg;
         }
         return responder.getResponse(parser.getClassifier(query));
