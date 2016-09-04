@@ -54,7 +54,12 @@ angular.module("lei-admin").controller('recordsController', function ($scope) {
 
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === this.DONE) {
-                console.log(this.responseText);
+                if (!this.responseText.error) {
+                    $scope.productType = '';
+                    $scope.products = [];
+                    $scope.$apply();
+                    alert('success');
+                }
             }
         });
 

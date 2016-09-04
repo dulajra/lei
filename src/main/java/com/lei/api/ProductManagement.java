@@ -2,6 +2,7 @@ package com.lei.api;
 
 import Beans.ProductsJaxBean;
 import com.MongoEntities.LocationEntity;
+import com.MongoEntities.ProductEntity;
 import com.MongoEntities.TypeEntity;
 import com.utils.GenericTemplate;
 import com.utils.MongoTemplate;
@@ -26,24 +27,41 @@ public class ProductManagement {
     public GenericTemplate getMessage(final ProductsJaxBean input) {
         MongoOperations ops = MongoTemplate.getOperator();
         // if the type available add the product
-        TypeEntity type = ops.find(Query.query(Criteria.where("name").regex(input.productType)), TypeEntity.class).get(0);
+        TypeEntity type = null;
+        if (ops.find(Query.query(Criteria.where("name").regex(input.productType)), TypeEntity.class).size() > 0) {
+            type = ops.find(Query.query(Criteria.where("name").regex(input.productType)), TypeEntity.class).get(0);
+        }
         if (type == null) {
             type = new TypeEntity();
             type.setName(input.productType);
-            LocationEntity location = ops.find(Query.query(Criteria.where("name").regex(input.location.getName())), LocationEntity.class).get(0);
+            LocationEntity location = null;
+            if (ops.find(Query.query(Criteria.where("name").regex(input.location.getName())), LocationEntity.class).size() > 0) {
+                ops.find(Query.query(Criteria.where("name").regex(input.location.getName())), LocationEntity.class).get(0);
+            }
             if (location == null) {
-                ops.save(input.location);
+                location = input.location;
+                ops.save(location);
             }
             type.getLocations().add(location);
             ops.save(type);
         } else {
-            LocationEntity location = ops.find(Query.query(Criteria.where("name").regex(input.location.getName())), LocationEntity.class).get(0);
-            if (location == null) {
-                ops.save(input.location);
+            LocationEntity location = null;
+            if (ops.find(Query.query(Criteria.where("name").regex(input.location.getName())), LocationEntity.class).size() > 0) {
+                location = ops.find(Query.query(Criteria.where("name").regex(input.location.getName())), LocationEntity.class).get(0);
             }
-            type.setLocations(new ArrayList<LocationEntity>());
-            type.getLocations().add(location);
+            if (location == null) {
+                location = input.location;
+                ops.save(location);
+            } else {
+                type.setLocations(new ArrayList<LocationEntity>());
+                type.getLocations().add(location);
+            }
             ops.save(type);
+        }
+        for (ProductEntity product : input.products) {
+            product.setTypeEntity(type);
+            System.out.println(type.getId());
+            ops.save(product);
         }
         return new GenericTemplate();
     }

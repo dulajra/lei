@@ -1,7 +1,7 @@
 /**
  * Created by anuradhawick on 9/4/16.
  */
-var app = angular.module('lei-admin', ['ngRoute']);
+var app = angular.module('lei-admin', ['ngRoute', 'base64']);
 
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
