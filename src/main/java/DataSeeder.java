@@ -19,7 +19,7 @@ public class DataSeeder {
         // adding dummy locations
         for (int i = 1; i < 11; i++) {
             LocationEntity locationEntity = new LocationEntity();
-            locationEntity.setName("location" + i);
+            locationEntity.setName("" + (int) (Math.random() * 90));
             ops.save(locationEntity);
         }
 

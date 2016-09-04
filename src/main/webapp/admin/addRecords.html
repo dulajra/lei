@@ -1,0 +1,133 @@
+<script>
+    var svg = SVG('productTypeLocations');
+    var click = function () {
+        console.log(this.id);
+    };
+    rect.on('click', click);
+</script>
+<script>
+</script>
+<section class="content-header">
+    <h1>
+        Records
+        <small>Setup locations of product types</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Records</li>
+    </ol>
+</section>
+<section class="content">
+    <div ng-controller="recordsController">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Add products</h3>
+            </div>
+            <form role="form">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="productType">Product Type</label>
+                        <input class="form-control" id="productType" placeholder="Enter the product" type="text" ng-model="productType">
+                    </div>
+                    <div class="form-group">
+                        <label for="productTypeLocations">Location</label>
+                        <br>
+                        <div id="productTypeLocations">
+                            <svg width="580" height="400" style="display: block;margin: 0 auto;"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+                                <g>
+                                    <title>background</title>
+                                    <rect fill="#b7ffff" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+                                    <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%"
+                                       id="canvasGrid">
+                                        <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%"
+                                              width="100%"/>
+                                    </g>
+                                </g>
+                                <g>
+                                    <title>Layer 1</title>
+                                    <rect id="svg_1" height="39" width="201" y="20.5" x="23.5" stroke-width="1.5"
+                                          stroke="#fff" fill="#ff7f00"/>
+                                    <rect stroke="#fff" id="svg_2" height="39" width="225.999995" y="18.5" x="343.5"
+                                          stroke-width="1.5" fill="#ff7f00"/>
+                                    <rect id="svg_3" height="39" width="201" y="106.5" x="21.5" stroke-width="1.5"
+                                          stroke="#fff" fill="#ff7f00"/>
+                                    <rect stroke="#fff" id="svg_4" height="39" width="217.999988" y="81.5"
+                                          x="343.500011" stroke-width="1.5" fill="#ff7f00"/>
+                                    <rect stroke="#fff" id="svg_5" height="198.999994" width="47.999999" y="177.5"
+                                          x="23.5" stroke-width="1.5" fill="#ff7f00"/>
+                                    <rect stroke="#fff" id="svg_6" height="192.999995" width="47.999999" y="178.5"
+                                          x="119.5" stroke-width="1.5" fill="#ff7f00"/>
+                                    <rect stroke="#fff" id="svg_7" height="190.999995" width="47.999999" y="178.5"
+                                          x="209.5" stroke-width="1.5" fill="#ff7f00"/>
+                                    <rect stroke="#fff" id="svg_8" height="182.000005" width="47.999999" y="182.5"
+                                          x="296.5" stroke-width="1.5" fill="#827ef7"/>
+                                    <ellipse ry="24" rx="27.5" id="svg_9" cy="207.5" cx="417" stroke-opacity="null"
+                                             stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                                    <ellipse ry="24" rx="27.5" id="svg_10" cy="342.5" cx="422" stroke-opacity="null"
+                                             stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                                    <ellipse ry="24" rx="27.5" id="svg_12" cy="206.5" cx="512" stroke-opacity="null"
+                                             stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                                    <ellipse ry="24" rx="27.5" id="svg_13" cy="342.5" cx="517" stroke-opacity="null"
+                                             stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                                    <rect stroke="#fff" id="svg_14" height="130.999999" width="41" y="21.5" x="269.5"
+                                          fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#ff7f00"/>
+                                    <ellipse ry="24" rx="27.5" id="svg_16" cy="272.5" cx="419" stroke-opacity="null"
+                                             stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                                    <ellipse ry="24" rx="27.5" id="svg_17" cy="270.5" cx="516" stroke-opacity="null"
+                                             stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productTable" class="control-label">Products</label>
+                        <div id="productTable">
+                            <div class="box">
+                                <div class="box-body no-padding">
+                                    <table class="table table-condensed">
+                                        <tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Price</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="prod in products">
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ prod.name }}</td>
+                                            <td>{{ prod.description }}</td>
+                                            <td>
+                                                {{ prod.price.toFixed(2)}}
+                                            </td>
+                                            <td style="vertical-align: middle" ng-click="remove($index)"><a href=""><i
+                                                    class="fa fa-trash"></i></a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="col-sm-4">Name<input class="form-control" type="text" ng-model="name"></span>
+                            <span class="col-sm-4">Description<input class="form-control" type="text"
+                                                                     ng-model="description"></span>
+                            <span class="col-sm-3">Price<input class="form-control" type="number" min="0"
+                                                               ng-model="price" required></span>
+                            <span class="col-sm-1"><br><button type="submit" onclick="return false;"
+                                                               class="btn btn-primary"
+                                                               ng-click="addProduct()">Add</button></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveProducts()">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
