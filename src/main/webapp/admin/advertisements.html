@@ -13,30 +13,22 @@
         <div class="box">
             <div class="post">
                 <div class="box-body">
-                    <div class="col-sm-3">
-                        <img class="img-responsive" src="/dist/img/photo2.png" alt="Photo">
-                        <a href="javascript:void(0)" style="color: whitesmoke"><span><i
+                    <div class="col-sm-3" ng-repeat="add in advertisements">
+                        <img class="img-responsive" src="{{ add.encodedImage }}" alt="Photo"
+                             style="height: 165px;margin: 5px;" ng-click="showPreview($index)">
+                        <a href="javascript:void(0)" ng-click="deleteAdd($index)" style="color: red"><span><i
                                 style="position: absolute;top: 10px;right: 25px; z-index: 10"
                                 class="fa fa-times"></i></span></a>
-                    </div>
-                    <div class="col-sm-3">
-                        <img class="img-responsive" src="/dist/img/photo3.jpg" alt="Photo">
-                    </div>
-                    <div class="col-sm-3">
-                        <img class="img-responsive" src="/dist/img/photo4.jpg" alt="Photo">
-                    </div>
-                    <div class="col-sm-3">
-                        <img class="img-responsive" src="/dist/img/photo1.png" alt="Photo">
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="form-group">
                         <label for="imageFile">Select image input</label>
-                        <input id="imageFile" type="file" ng-model="inputImage" accept="image/*">
+                        <input id="imageFile" type="file" ng-bind="imageFile" file-model="inputImage" accept="image/*">
                         <p class="help-block">Uploaded images will be displayed</p>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary" ng-click="saveFile()">Add Image</button>
+                        <button class="btn btn-primary" ng-click="uploadFile()">Add Image</button>
                     </div>
                 </div>
             </div>
