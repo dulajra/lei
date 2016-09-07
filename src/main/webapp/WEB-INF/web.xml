@@ -23,8 +23,20 @@
         <servlet-name>admin</servlet-name>
         <jsp-file>/admin/admin.jsp</jsp-file>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
         <url-pattern>/lei-admin/*</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>home</servlet-name>
+        <jsp-file>/customer/home.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>home</servlet-name>
+        <url-pattern>/customer</url-pattern>
+    </servlet-mapping>
+
 </web-app>
