@@ -39,6 +39,7 @@
     <base href="/lei-admin/">
 
     <link rel="stylesheet" href="/bootstrap/css/chat.css">
+    <script src="/bootstrap/js/jquery.js"></script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini" ng-controller="MainController">
@@ -66,29 +67,8 @@
                         <div class="panel-heading">
                             <p style="text-align: center" ;>DViana</p>
                         </div>
-                        <div class="panel-body" style="height: 80%;">
+                        <div id="chat-body" class="panel-body" style="height: 80%;">
                             <ul class="chat">
-                                <li class="left clearfix"><span class="chat-img pull-left">
-                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle"/>
-                        </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">DViana</strong>
-                                        </div>
-                                        <p>
-
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix"><span class="chat-img pull-right">
-                            <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle"/>
-                        </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="pull-right primary-font">You</strong>
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                         <div class="panel-footer" style="height: 10%;">
@@ -106,7 +86,6 @@
                 </div>
             </div>
             <div class="col-md-9">
-
 
             </div>
         </div>
@@ -176,15 +155,16 @@
             for (var i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     final_transcript += event.results[i][0].transcript;
+                    customerMsg(final_transcript);
+
+                    console.log("final: " + final_transcript);
+                    console.log("interim: " + interim_transcript);
+
+                    final_transcript = '';
                 } else {
                     interim_transcript += event.results[i][0].transcript;
                 }
             }
-
-            console.log(final_transcript);
-            console.log(interim_transcript);
-
-            chatInput.value =final_transcript;
 
 //            final_span.innerHTML = linebreak(final_transcript);
 //            interim_span.innerHTML = linebreak(interim_transcript);
@@ -202,29 +182,31 @@
         recognition.start();
     }
 
-    function speak(msg, side){
-        <li class="left clearfix"><span class="chat-img pull-left">
-            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle"/>
-        </span>
-            <div class="chat-body clearfix">
-                <div class="header">
-                    <strong class="primary-font">DViana</strong>
-                </div>
+    function customerMsg(msg){
+        var element = "<li class='right clearfix'><span class='chat-img pull-right'>" +
+                "<img src='http://placehold.it/50/FA6F57/fff&text=ME' alt='User Avatar' class='img-circle'/>" +
+                "</span>" +
+                "<div class='chat-body clearfix'>" +
+                "<p>" + msg + "</p>" +
+                "</div>" +
+                "</li>";
 
-            </div>
-        </li>
+        $("ul").append(element);
     }
 
-    function think(){
-        <li class="right clearfix"><span class="chat-img pull-right">
-            <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle"/>
-        </span>
-            <div class="chat-body clearfix">
-                <div class="header">
-                    <strong class="pull-right primary-font">You</strong>
-                </div>
-            </div>
-        </li>
+    function aiMsg(msg){
+        var element = "<li class='left clearfix'><span class='chat-img pull-right'>" +
+                "<img src='http://placehold.it/50/FA6F57/fff&text=ME' alt='User Avatar' class='img-circle'/>" +
+                "</span>" +
+                "<div class='chat-body clearfix'>" +
+                "<div class='header'>" +
+                "<strong class='pull-right primary-font'>You</strong>" +
+                "</div>" +
+                "<p>msg</p>" +
+                "</div>" +
+                "</li>";
+
+        chatBody.append(element);
     }
 
     start();
