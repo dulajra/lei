@@ -75,7 +75,7 @@
                             <div class="input-group">
                                 <input id="chat-input" type="text" class="form-control input-sm"
                                        placeholder="Type your message here..."/>
-                        <span class="input-group-btn">
+                                <span class="input-group-btn">
                             <button class="btn btn-warning btn-sm" id="btn-chat">
                                 Send
                             </button>
@@ -141,6 +141,13 @@
         customerMsg($("#chat-input").val());
     });
 
+    $('#chat-input').keyup(function (e) {
+        if (e.which === 13) {
+            customerMsg($("#chat-input").val());
+            $("#chat-input").val('');
+        }
+    });
+
 </script>
 
 <!-- Voice script -->
@@ -191,7 +198,7 @@
         recognition.start();
     }
 
-    function customerMsg(msg){
+    function customerMsg(msg) {
         var element = "<li class='right clearfix'><span class='chat-img pull-right'>" +
                 "<img src='http://placehold.it/50/FA6F57/fff&text=ME' alt='User Avatar' class='img-circle'/>" +
                 "</span>" +
@@ -204,7 +211,7 @@
         scroll();
     }
 
-    function aiMsg(msg){
+    function aiMsg(msg) {
         var element = "<li class='left clearfix'><span class='chat-img pull-left'>" +
                 "<img src='http://placehold.it/50/55C1E7/fff&amp;text=U' alt='User Avatar' class='img-circle'/>" +
                 "</span>" +
@@ -218,7 +225,7 @@
     }
 
     function scroll() {
-        $("#panel-body").animate({ scrollTop: $("#chat-list").height() }, 1000);
+        $("#panel-body").animate({scrollTop: $("#chat-list").height()}, 1000);
     }
 
     start();
