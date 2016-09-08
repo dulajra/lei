@@ -67,8 +67,8 @@
                         <div class="panel-heading">
                             <p style="text-align: center" ;>DViana</p>
                         </div>
-                        <div id="chat-body" class="panel-body" style="height: 80%;">
-                            <ul class="chat">
+                        <div id="panel-body" class="panel-body" style="height: 80%;">
+                            <ul id="chat-list" class="chat">
                             </ul>
                         </div>
                         <div class="panel-footer" style="height: 10%;">
@@ -134,6 +134,15 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
 
+<!-- Script for button clicks -->
+<script>
+
+    $("#btn-chat").on('click', function () {
+        customerMsg($("#chat-input").val());
+    });
+
+</script>
+
 <!-- Voice script -->
 <script>
     var recognition;
@@ -192,21 +201,24 @@
                 "</li>";
 
         $("ul").append(element);
+        scroll();
     }
 
     function aiMsg(msg){
-        var element = "<li class='left clearfix'><span class='chat-img pull-right'>" +
-                "<img src='http://placehold.it/50/FA6F57/fff&text=ME' alt='User Avatar' class='img-circle'/>" +
+        var element = "<li class='left clearfix'><span class='chat-img pull-left'>" +
+                "<img src='http://placehold.it/50/55C1E7/fff&amp;text=U' alt='User Avatar' class='img-circle'/>" +
                 "</span>" +
                 "<div class='chat-body clearfix'>" +
-                "<div class='header'>" +
-                "<strong class='pull-right primary-font'>You</strong>" +
-                "</div>" +
-                "<p>msg</p>" +
+                "<p>" + msg + "</p>" +
                 "</div>" +
                 "</li>";
 
-        chatBody.append(element);
+        $("ul").append(element);
+        scroll();
+    }
+
+    function scroll() {
+        $("#panel-body").animate({ scrollTop: $("#chat-list").height() }, 1000);
     }
 
     start();
