@@ -19,18 +19,20 @@ public class DataSeeder {
         // adding dummy locations
         for (int i = 1; i < 11; i++) {
             LocationEntity locationEntity = new LocationEntity();
-            locationEntity.setName("" + (int) (Math.random() * 90));
+            locationEntity.setName("svg_" + (i % 5));
             ops.save(locationEntity);
         }
 
         ops.dropCollection(TypeEntity.class);
         // saving types and locations
+        int i = 0;
         for (String string :
                 typeEntities) {
             TypeEntity typeEntity = new TypeEntity();
             typeEntity.setName(string);
-            typeEntity.getLocations().add(ops.findAll(LocationEntity.class).get((int) Math.random() * 10));
+            typeEntity.getLocations().add(ops.findAll(LocationEntity.class).get(i % 5));
             ops.save(typeEntity);
+            i++;
         }
 
         ops.dropCollection(ProductEntity.class);

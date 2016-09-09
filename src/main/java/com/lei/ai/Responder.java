@@ -47,8 +47,7 @@ public class Responder {
                 LocationEntity location = Locator.getLocationByItem(Finder.findProduct(classfiedHashMap.get("NN")).getName());
                 MessageTemplate msg = new MessageTemplate();
                 msg.message = "You can find " +
-                        Finder.findProduct(classfiedHashMap.get("NN")).getName() +
-                        " at " + location.getName();
+                        Finder.findProduct(classfiedHashMap.get("NN")).getName() + " from the map shown";
                 msg.array.add(location);
                 msg.type = "location";
                 return msg;
@@ -58,7 +57,7 @@ public class Responder {
                 LocationEntity location = Locator.getLocationByType(Finder.findType(classfiedHashMap.get("NN")).getName());
                 MessageTemplate msg = new MessageTemplate();
                 msg.message = "You can find " + Finder.findType(classfiedHashMap.get("NN")).getName() +
-                        " at " + location.getName();
+                        " from the map shown";
                 msg.array.add(location);
                 msg.type = "location";
                 return msg;
@@ -76,7 +75,7 @@ public class Responder {
                 // details of the product
                 ProductEntity product = Finder.findProduct(classfiedHashMap.get("NN"));
                 MessageTemplate msg = new MessageTemplate();
-                msg.message = "Product details: ";
+                msg.message = "Product details";
                 msg.type = "product";
                 msg.array.add(product);
                 return msg;
@@ -92,7 +91,7 @@ public class Responder {
                 // cheapest by type
                 ProductEntity product = Comparators.getCheapest(Finder.findType(classfiedHashMap.get("NN")));
                 MessageTemplate msg = new MessageTemplate();
-                msg.message = "Cheapest type of " + product.getTypeEntity().getName() + " is ";
+                msg.message = "Cheapest type of " + product.getTypeEntity().getName() + " is " + product.getName();
                 msg.type = "product";
                 msg.array.add(product);
                 return msg;
@@ -125,7 +124,7 @@ public class Responder {
             MongoOperations ops = MongoTemplate.getOperator();
             if (Finder.findType(classfiedHashMap.get("NN")) != null) {
                 TypeEntity typeEntity = Finder.findType(classfiedHashMap.get("NN"));
-                List<ProductEntity> productEntities = ops.find(Query.query(Criteria.where("typeEntity").is(typeEntity)),ProductEntity.class);
+                List<ProductEntity> productEntities = ops.find(Query.query(Criteria.where("typeEntity").is(typeEntity)), ProductEntity.class);
                 MessageTemplate msg = new MessageTemplate();
                 msg.message = "Details of " + Finder.findType(classfiedHashMap.get("NN")).getName() + " products are as follows";
                 msg.type = "products";
@@ -136,7 +135,7 @@ public class Responder {
             } else if (Finder.findProduct(classfiedHashMap.get("NN")) != null) {
                 ProductEntity product = Comparators.getProduct(Finder.findProduct(classfiedHashMap.get("NN")).getName());
                 MessageTemplate msg = new MessageTemplate();
-                msg.message = "Details of " + product + " :";
+                msg.message = "Details of " + product.getName();
                 msg.type = "product";
                 msg.array.add(product);
                 return msg;

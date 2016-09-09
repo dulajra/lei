@@ -19,7 +19,7 @@ public class Locator {
     // find the location of a given item type
     public static LocationEntity getLocationByType(String typeName) {
         TypeEntity typeEntity = ops.find(Query.query(Criteria.where("name").
-                        regex("[" + typeName + "]")),
+                        regex("(" + typeName + ")")),
                 TypeEntity.class).get(0);
         List<LocationEntity> locationEntities = typeEntity.getLocations();
         // TODO for the time being this supports only one location
@@ -29,7 +29,7 @@ public class Locator {
     // find the location given the item
     public static LocationEntity getLocationByItem(String itemName) {
         ProductEntity productEntity = ops.find(Query.query(Criteria.where("name").
-                        regex("[" + itemName + "]")),
+                        regex("(" + itemName + ")")),
                 ProductEntity.class).get(0);
 
         List<LocationEntity> locationEntities = productEntity.getTypeEntity().getLocations();

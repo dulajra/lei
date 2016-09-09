@@ -36,7 +36,7 @@
 
     <servlet-mapping>
         <servlet-name>home</servlet-name>
-        <url-pattern>/customer</url-pattern>
+        <url-pattern>/lei-customer/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
