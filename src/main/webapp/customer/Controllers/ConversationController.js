@@ -15,18 +15,20 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
     let selectedSVGColor = null;
     let selectedSVGId = null;
 
-    // loading advertisements
-    let data = null;
-    let xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-    xhr.addEventListener("readystatechange", function () {
-        if (this.readyState === this.DONE) {
-            $scope.advertisements = JSON.parse(this.responseText);
-            $scope.$apply();
-        }
-    });
-    xhr.open("GET", "http://localhost:8080/lei-api/advertisement-management/get-ads");
-    xhr.send(data);
+    $scope.updateAdds = function () {
+        // loading advertisements
+        let data = null;
+        let xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === this.DONE) {
+                $scope.advertisements = JSON.parse(this.responseText);
+                $scope.$apply();
+            }
+        });
+        xhr.open("GET", "http://localhost:8080/lei-api/advertisement-management/get-ads");
+        xhr.send(data);
+    };
 
 
 //     let recognition;
@@ -172,4 +174,5 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
     };
 
     $scope.addPriorityExpire();
+    $scope.updateAdds();
 });
