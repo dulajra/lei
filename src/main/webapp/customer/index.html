@@ -35,17 +35,18 @@
     <script src="/admin/controllers/MainController.js"></script>
     <script src="/customer/Controllers/ConversationController.js"></script>
     <script src="/dist/js/angular-base64.min.js"></script>
-    <base href="/customer/">
+    <base href="/lei-customer/">
 
     <link rel="stylesheet" href="/bootstrap/css/chat.css">
     <script src="/bootstrap/js/jquery.js"></script>
 
 </head>
 <style>
-    .panel{
+    .panel {
         border-radius: 0px !important;
     }
-    hr{
+
+    hr {
         margin: 0;
         border-top: 5px solid black;
     }
@@ -53,154 +54,161 @@
 <body class="hold-transition" ng-controller="MainController">
 <div class="">
     <div class="" ng-controller="ConversationController">
-            <div ng-class="addPriorityHigh? 'col-md-9' :'col-md-4'" style="display: table;height: 100%; background-color: #f0f0f0">
-                <div style="display: table-cell;vertical-align: middle;" id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item" ng-class='{"active": $index==0}' ng-repeat="add in advertisements">
-                            <img class="img-responsive" ng-src="{{add.encodedImage}}" alt="Chania" style="display: block;margin: 0 auto; max-height: 100%; max-width: 100%">
-                        </div>
+        <div ng-class="addPriorityHigh? 'col-md-9' :'col-md-4'"
+             style="display: table;height: 100%; background-color: #f0f0f0">
+            <div style="display: table-cell;vertical-align: middle;" id="myCarousel" class="carousel slide"
+                 data-ride="carousel">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item" ng-class='{"active": $index==0}' ng-repeat="add in advertisements">
+                        <img class="img-responsive" ng-src="{{add.encodedImage}}" alt="Chania"
+                             style="display: block;margin: 0 auto; max-height: 100%; max-width: 100%">
                     </div>
                 </div>
             </div>
-            <div class="col-md-5" ng-if="!addPriorityHigh" style="background-color: #f0f0f0; height: 100%;overflow-y: scroll">
-                <div class="box-header">
-                    <h2 style="text-align: center" ;>Item Details</h2>
-                </div>
-                <hr>
-                <div>
-                    <div ng-switch on="type">
-                        <div ng-switch-when="product">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Brand</th>
-                                    <th>Type</th>
-                                    <th>price</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="product in arrayobjects">
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.typeEntity.name}}</td>
-                                    <td>{{product.price}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div ng-switch-when="products">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Brand</th>
-                                    <th>price</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="product in arrayobjects">
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.price}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div ng-switch-when="location">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Map</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="product in arrayobjects">
-                                    <td>You can find the requested product from the below map</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+        </div>
+        <div class="col-md-5" ng-if="!addPriorityHigh"
+             style="background-color: #f0f0f0; height: 100%;overflow-y: scroll">
+            <div class="box-header">
+                <h2 style="text-align: center" ;>Item Details</h2>
+            </div>
+            <hr>
+            <div>
+                <div ng-switch on="type">
+                    <div ng-switch-when="product">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Brand</th>
+                                <th>Type</th>
+                                <th>price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="product in arrayobjects">
+                                <td>{{product.name}}</td>
+                                <td>{{product.typeEntity.name}}</td>
+                                <td>{{product.price}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-switch-when="products">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Brand</th>
+                                <th>price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="product in arrayobjects">
+                                <td>{{product.name}}</td>
+                                <td>{{product.price}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-switch-when="location">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Map</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="product in arrayobjects">
+                                <td>You can find the requested product from the below map</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div id="svgDiv" ng-if="location">
-                    <svg width="580" height="400" style="display: block;margin: 0 auto;"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
-                        <g>
-                            <title>background</title>
-                            <rect fill="#b7ffff" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
-                            <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%"
-                               id="canvasGrid">
-                                <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%"
-                                      width="100%"/>
-                            </g>
-                        </g>
-                        <g>
-                            <title>Layer 1</title>
-                            <rect id="svg_1" height="39" width="201" y="20.5" x="23.5" stroke-width="1.5"
-                                  stroke="#fff" fill="#ff7f00"/>
-                            <rect stroke="#fff" id="svg_2" height="39" width="225.999995" y="18.5" x="343.5"
-                                  stroke-width="1.5" fill="#ff7f00"/>
-                            <rect id="svg_3" height="39" width="201" y="106.5" x="21.5" stroke-width="1.5"
-                                  stroke="#fff" fill="#ff7f00"/>
-                            <rect stroke="#fff" id="svg_4" height="39" width="217.999988" y="81.5"
-                                  x="343.500011" stroke-width="1.5" fill="#ff7f00"/>
-                            <rect stroke="#fff" id="svg_5" height="198.999994" width="47.999999" y="177.5"
-                                  x="23.5" stroke-width="1.5" fill="#ff7f00"/>
-                            <rect stroke="#fff" id="svg_6" height="192.999995" width="47.999999" y="178.5"
-                                  x="119.5" stroke-width="1.5" fill="#ff7f00"/>
-                            <rect stroke="#fff" id="svg_7" height="190.999995" width="47.999999" y="178.5"
-                                  x="209.5" stroke-width="1.5" fill="#ff7f00"/>
-                            <rect stroke="#fff" id="svg_8" height="182.000005" width="47.999999" y="182.5"
-                                  x="296.5" stroke-width="1.5" fill="#827ef7"/>
-                            <ellipse ry="24" rx="27.5" id="svg_9" cy="207.5" cx="417" stroke-opacity="null"
-                                     stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
-                            <ellipse ry="24" rx="27.5" id="svg_10" cy="342.5" cx="422" stroke-opacity="null"
-                                     stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
-                            <ellipse ry="24" rx="27.5" id="svg_12" cy="206.5" cx="512" stroke-opacity="null"
-                                     stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
-                            <ellipse ry="24" rx="27.5" id="svg_13" cy="342.5" cx="517" stroke-opacity="null"
-                                     stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
-                            <rect stroke="#fff" id="svg_14" height="130.999999" width="41" y="21.5" x="269.5"
-                                  fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#ff7f00"/>
-                            <ellipse ry="24" rx="27.5" id="svg_16" cy="272.5" cx="419" stroke-opacity="null"
-                                     stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
-                            <ellipse ry="24" rx="27.5" id="svg_17" cy="270.5" cx="516" stroke-opacity="null"
-                                     stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
-                        </g>
-                    </svg>
-                </div>
             </div>
-            <div class="col-md-3" style="background-color: #f0f0f0">
-                <div class="chat-box">
-                    <div class="panel panel-primary">
-                        <div class="box-header">
-                            <h2 style="text-align: center">Lei - DViana</h2>
-                        </div>
-                        <hr>
-                        <div id="panel-body" class="panel-body" style="height: 80%;">
-                            <ul id="chat-list" class="chat">
-                                <!--AI Message-->
-                                <div class="direct-chat-msg" ng-class="msg.ai? '':'right'" ng-repeat="msg in conversation">
-                                    <img class="direct-chat-img" ng-src="{{ msg.ai? '/dist/img/user1-128x128.jpg':'/dist/img/user3-128x128.jpg' }}" alt="Message User Image"><!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text" ng-class="msg.ai? '':'bg-yellow'">
-                                        {{ msg.msg }}
-                                    </div>
+            <div id="svgDiv" ng-if="location">
+                <svg width="580" height="400" style="display: block;margin: 0 auto;"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+                    <g>
+                        <title>background</title>
+                        <rect fill="#b7ffff" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+                        <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%"
+                           id="canvasGrid">
+                            <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%"
+                                  width="100%"/>
+                        </g>
+                    </g>
+                    <g>
+                        <title>Layer 1</title>
+                        <rect id="svg_1" height="39" width="201" y="20.5" x="23.5" stroke-width="1.5"
+                              stroke="#fff" fill="#ff7f00"/>
+                        <rect stroke="#fff" id="svg_2" height="39" width="225.999995" y="18.5" x="343.5"
+                              stroke-width="1.5" fill="#ff7f00"/>
+                        <rect id="svg_3" height="39" width="201" y="106.5" x="21.5" stroke-width="1.5"
+                              stroke="#fff" fill="#ff7f00"/>
+                        <rect stroke="#fff" id="svg_4" height="39" width="217.999988" y="81.5"
+                              x="343.500011" stroke-width="1.5" fill="#ff7f00"/>
+                        <rect stroke="#fff" id="svg_5" height="198.999994" width="47.999999" y="177.5"
+                              x="23.5" stroke-width="1.5" fill="#ff7f00"/>
+                        <rect stroke="#fff" id="svg_6" height="192.999995" width="47.999999" y="178.5"
+                              x="119.5" stroke-width="1.5" fill="#ff7f00"/>
+                        <rect stroke="#fff" id="svg_7" height="190.999995" width="47.999999" y="178.5"
+                              x="209.5" stroke-width="1.5" fill="#ff7f00"/>
+                        <rect stroke="#fff" id="svg_8" height="182.000005" width="47.999999" y="182.5"
+                              x="296.5" stroke-width="1.5" fill="#827ef7"/>
+                        <ellipse ry="24" rx="27.5" id="svg_9" cy="207.5" cx="417" stroke-opacity="null"
+                                 stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                        <ellipse ry="24" rx="27.5" id="svg_10" cy="342.5" cx="422" stroke-opacity="null"
+                                 stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                        <ellipse ry="24" rx="27.5" id="svg_12" cy="206.5" cx="512" stroke-opacity="null"
+                                 stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                        <ellipse ry="24" rx="27.5" id="svg_13" cy="342.5" cx="517" stroke-opacity="null"
+                                 stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                        <rect stroke="#fff" id="svg_14" height="130.999999" width="41" y="21.5" x="269.5"
+                              fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#ff7f00"/>
+                        <ellipse ry="24" rx="27.5" id="svg_16" cy="272.5" cx="419" stroke-opacity="null"
+                                 stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                        <ellipse ry="24" rx="27.5" id="svg_17" cy="270.5" cx="516" stroke-opacity="null"
+                                 stroke-width="1.5" stroke="#fff" fill="#827ef7"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="col-md-3" style="background-color: #f0f0f0">
+            <div class="chat-box">
+                <div class="panel panel-primary">
+                    <div class="box-header">
+                        <h2 style="text-align: center">Lei - DViana</h2>
+                    </div>
+                    <hr>
+                    <div id="panel-body" class="panel-body" style="height: 80%;">
+                        <ul id="chat-list" class="chat">
+                            <!--AI Message-->
+                            <div class="direct-chat-msg" ng-class="msg.ai? '':'right'" ng-repeat="msg in conversation">
+                                <img class="direct-chat-img"
+                                     ng-src="{{ msg.ai? '/dist/img/user1-128x128.jpg':'/dist/img/user3-128x128.jpg' }}"
+                                     alt="Message User Image"><!-- /.direct-chat-img -->
+                                <div class="direct-chat-text" ng-class="msg.ai? '':'bg-yellow'">
+                                    {{ msg.msg }}
                                 </div>
-                            </ul>
-                        </div>
-                        <div class="panel-footer" style="height: 10%;">
-                            <div class="input-group">
-                                <input id="chat-input" type="text" class="form-control input-sm"
-                                       placeholder="Type your message here..." ng-model="inputMessage" ng-keyup="keyUpEvent($event)"/>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="panel-footer" style="height: 10%;">
+                        <div class="input-group">
+                            <input id="chat-input" type="text" class="form-control input-sm"
+                                   placeholder="Type your message here..." ng-model="inputMessage"
+                                   ng-keyup="keyUpEvent($event)"/>
                                 <span class="input-group-btn">
                             <button class="btn btn-warning btn-sm" id="btn-chat" ng-click="sendClick()">
                                 Send
                             </button>
                         </span>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -210,6 +218,19 @@
         reserved.
     </footer>
 </div>
+
+<script>
+
+    //    window.speechSynthesis.onvoiceschanged = function() {
+    //        var l = window.speechSynthesis.getVoices();
+    //    };
+
+    speechSynthesis.getVoices().forEach(function (voice) {
+        alert(voice.name);
+    });
+
+</script>
+
 <!-- jQuery 2.2.3 -->
 <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
