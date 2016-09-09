@@ -119,12 +119,12 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
 
     $scope.customerMsg = function (msg) {
         $scope.conversation.push({ai: false, msg: msg});
-        scroll();
+        $scope.scroll();
     };
 
     $scope.aiMsg = function (msg) {
         $scope.conversation.push({ai: true, msg: msg});
-        scroll();
+        $scope.scroll();
     };
 
     $scope.scroll = function () {
