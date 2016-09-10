@@ -31,46 +31,60 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
     };
 
 
-//     let recognition;
-//     let chatInput = document.getElementById("chat-input");
-//     let final_transcript = '';
-//
-//     if (!('webkitSpeechRecognition' in window)) {
-// //        upgrade();
-//     } else {
-//         recognition = new webkitSpeechRecognition();
-//         recognition.continuous = true;
-//         recognition.interimResults = true;
-//
-//         recognition.onstart = function () {
-//             console.log('Started')
-//         };
-//
-//         recognition.onresult = function (event) {
-//             let interim_transcript = '';
-//
-//             for (let i = event.resultIndex; i < event.results.length; ++i) {
-//                 if (event.results[i].isFinal) {
-//                     final_transcript += event.results[i][0].transcript;
-//                     $scope.customerMsg(final_transcript);
-//
-//                     console.log("final: " + final_transcript);
-//                     console.log("interim: " + interim_transcript);
-//
-//                     final_transcript = '';
-//                 } else {
-//                     interim_transcript += event.results[i][0].transcript;
-//                 }
-//             }
-//         };
-//
-//         recognition.onerror = function (event) {
-//         };
-//
-//         recognition.onend = function () {
-//             console.log('Finished');
-//         };
-//     }
+        if (!('webkitSpeechRecognition' in window)) {
+//        upgrade();
+        } else {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+
+            recognition.onstart = function () {
+                console.log('Started')
+            };
+
+            recognition.onresult = function (event) {
+                let interim_transcript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        final_transcript += event.results[i][0].transcript;
+
+                        $('#chat-input').val(final_transcript);
+                        let tmp = final_transcript;
+                        $scope.customerMsg(tmp);
+                        $scope.fetchAiResponse(tmp);
+                        console.log("final: " + final_transcript);
+                        console.log("interim: " + interim_transcript);
+
+                        final_transcript = '';
+                        interim_transcript = '';
+                    } else {
+                        interim_transcript += event.results[i][0].transcript;
+                        $('#chat-input').val(interim_transcript);
+                    }
+                }
+            };
+
+            recognition.onerror = function (event) {
+            };
+
+            recognition.onend = function () {
+                console.log('Finished');
+            };
+        }
+
+        $scope.speak = function (text) {
+            var msg = new SpeechSynthesisUtterance();
+            var voices = window.speechSynthesis.getVoices();
+            msg.voice = voices[10]; // Note: some voices don't support altering params
+            msg.voiceURI = 'native';
+            msg.volume = 1; // 0 to 1
+            msg.rate = 1; // 0.1 to 10
+            msg.pitch = 2; //0 to 2
+            msg.text = text;
+            msg.lang = 'en-US';
+            speechSynthesis.speak(msg);
+        }
 
     $scope.init = function () {
         $scope.svg = Snap('#svgdiv');
@@ -126,6 +140,7 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
 
     $scope.aiMsg = function (msg) {
         $scope.conversation.push({ai: true, msg: msg});
+        $scope.speak(msg);
         $scope.scroll();
     };
 
@@ -175,4 +190,5 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
 
     $scope.addPriorityExpire();
     $scope.updateAdds();
+    $scope.start();
 });
