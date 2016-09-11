@@ -164,9 +164,10 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
         setInterval(function () {
             if ($scope.addTimeout + 5000 < Date.now()) {
                 $scope.addPriorityHigh = true;
+                $scope.conversation = [];
                 $scope.$apply();
             }
-        }, 10000);
+        }, 20000);
     };
 
     $scope.markFloor = function (svgId) {

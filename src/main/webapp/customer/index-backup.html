@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="/bootstrap/css/chat.css">
     <script src="/bootstrap/js/jquery.js"></script>
     <!-- end Custom -->
+
     <style>
         .bottom-add-bar {
             width: 75%;
@@ -108,6 +109,7 @@
         <section class="content full-screen">
             <div class="row full-screen" ng-controller="ConversationController">
                 <div class="col-md-9" style="height:100%; padding-top: 10px;">
+                    <!-- Advertisement -->
                     <div style="height: 80%;" ng-if="addPriorityHigh">
                         <div style="display: table;height: 100%;width: 100%;" >
                             <div style="display: table-cell;vertical-align: middle;">
@@ -116,6 +118,8 @@
                             </div>
                         </div>
                     </div>
+                    <!-- end Advertisement -->
+                    <!-- Product display -->
                     <div style="height: 80%;" ng-if="!addPriorityHigh">
                         <div class="col-md-3" ng-repeat="product in arrayobjects">
                             <div class="info-box">
@@ -128,6 +132,8 @@
                             </div>
                         </div>
                     </div>
+                    <!-- end Product display -->
+                    <!-- Advertisement preview -->
                     <div style="height: 20%;">
                         <div class="bottom-add-bar">
                             <div class="img-responsive" style="display: inline;" ng-repeat="add in advertisements">
@@ -135,7 +141,9 @@
                             </div>
                         </div>
                     </div>
+                    <!-- end Advertisement preview -->
                 </div>
+                <!-- Chat pane -->
                 <div class="col-md-3 no-padding no-margin" style="height:100%;">
                     <div class="chat-box" style="height:100%;">
                         <div class="panel panel-primary" style="height:100%;">
@@ -167,6 +175,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- end Chat pane -->
             </div>
         </section>
     </div>
