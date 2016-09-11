@@ -29,7 +29,7 @@ angular.module('lei-admin').controller('AdvertisementController', function ($sco
             $scope.$apply();
         }
     });
-    xhr.open("GET", "http://localhost:8080/lei-api/advertisement-management/get-ads");
+    xhr.open("GET", "/lei-api/advertisement-management/get-ads");
     xhr.send(data);
 
     $scope.uploadFile = function () {
@@ -49,7 +49,7 @@ angular.module('lei-admin').controller('AdvertisementController', function ($sco
                     }
                 });
 
-                xhr.open("POST", "http://localhost:8080/lei-api/advertisement-management/add-image");
+                xhr.open("POST", "/lei-api/advertisement-management/add-image");
                 xhr.setRequestHeader("content-type", "application/json");
                 xhr.send(JSON.stringify({encodedImage: data}));
             };
@@ -69,7 +69,7 @@ angular.module('lei-admin').controller('AdvertisementController', function ($sco
                     }
                 }
             });
-            xhr.open("DELETE", "http://localhost:8080/lei-api/advertisement-management/delete-add");
+            xhr.open("DELETE", "/lei-api/advertisement-management/delete-add");
             xhr.setRequestHeader("content-type", "application/json");
             xhr.send(data);
         }
