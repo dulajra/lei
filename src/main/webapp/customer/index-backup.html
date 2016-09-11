@@ -14,10 +14,10 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,34 +41,6 @@
     <link rel="stylesheet" href="/bootstrap/css/chat.css">
     <script src="/bootstrap/js/jquery.js"></script>
     <!-- end Custom -->
-    <style>
-        .bottom-add-bar {
-            width: 75%;
-            height: 10%;
-            overflow-x: scroll;
-            white-space: nowrap;
-            bottom: 0;
-            position: fixed;
-        }
-
-        .bottom-add-image {
-            border: solid whitesmoke;
-            height: 100%;
-        }
-
-        ::-webkit-scrollbar {
-            display: none;
-        }
-
-        .add-image {
-            display: block;
-            margin: 0 auto;
-            /*max-width: 100%;*/
-            /*height: 50% !important;*/
-            /*height: 500px !important;*/
-        }
-    </style>
-
 </head>
 <body class="hold-transition skin-blue layout-top-nav full-screen" ng-controller="MainController">
 <div class="wrapper full-screen">
@@ -111,12 +83,12 @@
                     <div style="height: 80%;" ng-if="addPriorityHigh">
                         <div style="display: table;height: 100%;width: 100%;">
                             <div style="display: table-cell;vertical-align: middle;">
-                                <img class="add-image"
+                                <img class="advertisement-preview"
                                      ng-src="{{ activeImage.encodedImage }}">
                             </div>
                         </div>
                     </div>
-                    <div style="height: 80%;" ng-if="!addPriorityHigh">
+                    <div style="height: 85%;" ng-if="!addPriorityHigh">
                         <div class="col-md-3" ng-repeat="product in arrayobjects">
                             <div class="info-box">
                                 <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
@@ -128,7 +100,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="height: 20%;">
+                    <div style="height: 15%;">
                         <div class="bottom-add-bar">
                             <div class="img-responsive" style="display: inline;" ng-repeat="add in advertisements">
                                 <img class="bottom-add-image" ng-src="{{add.encodedImage}}">
@@ -138,19 +110,19 @@
                 </div>
                 <div class="col-md-3 no-padding no-margin" style="height:100%;">
                     <div class="chat-box" style="height:100%;">
-                        <div class="box box-primary" style="height:100%;border-radius: 0">
+                        <div class="box box-primary direct-chat direct-chat-primary" style="height:100%;border-radius: 0">
                             <div id="panel-body" class="panel-body" style="height: 88%;">
-                                <ul id="chat-list" class="chat">
+                                <div id="chat-list" class="direct-chat-messages">
                                     <div class="direct-chat-msg" ng-class="msg.ai? '':'right'"
                                          ng-repeat="msg in conversation">
                                         <img class="direct-chat-img"
                                              ng-src="{{ msg.ai? '/dist/img/user1-128x128.jpg':'/dist/img/user3-128x128.jpg' }}"
                                              alt="Message User Image">
-                                        <div class="direct-chat-text" ng-class="msg.ai? '':'bg-yellow'">
+                                        <div class="direct-chat-text">
                                             {{ msg.msg }}
                                         </div>
                                     </div>
-                                </ul>
+                                </div>
                             </div>
                             <div class="box-footer" style="position: fixed;bottom: 0;">
                                 <div class="input-group">
