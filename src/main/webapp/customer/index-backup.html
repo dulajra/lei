@@ -89,15 +89,35 @@
                     <!-- end Advertisement -->
                     <!-- Product display -->
                     <div style="height: 80%; overflow: auto;" ng-if="!addPriorityHigh">
-                        <div class="col-md-3" ng-repeat="product in arrayobjects">
-                            <div class="info-box" style="padding: 0px; margin: 0px;">
-                                <span class="info-box-icon">
-                                    <img src="/dist/img/voice.png" alt="Product image" width="100%" height="100%">
-                                </span>
+                        <div ng-switch on="type">
+                            <div ng-switch-when="products">
+                                <div class="col-md-3" ng-repeat="product in arrayobjects" style="padding: 5px;">
+                                    <div class="info-box" style="padding: 0px; margin: 0px;">
+                                        <img src="/dist/img/voice.png" alt="Product image" width="100%" height="100%"
+                                             style="padding: 2px;" class="info-box-icon">
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{ product.name }}</span>
-                                    <span class="info-box-number">{{ product.price }}</span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">{{ product.name }}</span>
+                                            <span class="info-box-number">{{ product.price }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="product">
+                                <div class="col-md-12" style="height:100%">
+                                    <div class="panel panel-primary" style="height:100%">
+                                        <div class="panel-body" style="height:100%">
+                                            <div class="col-sm-6">
+                                                <img class="img-responsive" src="/dist/img/voice.png"
+                                                     alt="Product image" height="50%">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +125,7 @@
                     <!-- end Product display -->
                     <!-- Advertisement preview -->
                     <div style="height: 15%;">
-                        <div class="bottom-add-bar">
+                        <div class="bottom-add-bar" style="overflow: auto;">
                             <div class="img-responsive" style="display: inline;" ng-repeat="add in advertisements">
                                 <img class="bottom-add-image" ng-src="{{add.encodedImage}}">
                             </div>
@@ -116,7 +136,8 @@
                 <!-- Chat pane -->
                 <div class="col-md-3 no-padding no-margin" style="height:100%;">
                     <div class="chat-box" style="height:100%;">
-                        <div class="box box-primary direct-chat direct-chat-primary" style="height:100%;border-radius: 0">
+                        <div class="box box-primary direct-chat direct-chat-primary"
+                             style="height:100%;border-radius: 0">
                             <div id="panel-body" class="panel-body" style="height: 88%;">
                                 <div id="chat-list">
                                     <div class="direct-chat-msg" ng-class="msg.ai? '':'right'"
