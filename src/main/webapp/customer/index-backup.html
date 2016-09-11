@@ -80,18 +80,20 @@
     <div class="content-wrapper full-screen">
         <section class="content full-screen">
             <div class="row full-screen" ng-controller="ConversationController">
-                <div class="col-md-9" style="height:100%; padding-top: 10px;">
+                <div class="col-md-9" style="margin-top: 5px; height:100%; padding-top: 10px;">
                     <!-- Advertisement -->
                     <div style="height: 80%; width: 100%;" ng-if="addPriorityHigh">
-                            <img class="advertisement"
-                                 ng-src="{{ activeImage.encodedImage }}">
+                        <img class="advertisement"
+                             ng-src="{{ activeImage.encodedImage }}">
                     </div>
                     <!-- end Advertisement -->
                     <!-- Product display -->
-                    <div style="height: 80%;" ng-if="!addPriorityHigh">
+                    <div style="height: 80%; overflow: auto;" ng-if="!addPriorityHigh">
                         <div class="col-md-3" ng-repeat="product in arrayobjects">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                            <div class="info-box" style="padding: 0px; margin: 0px;">
+                                <span class="info-box-icon">
+                                    <img src="/dist/img/voice.png" alt="Product image" width="100%" height="100%">
+                                </span>
 
                                 <div class="info-box-content">
                                     <span class="info-box-text">{{ product.name }}</span>
@@ -116,7 +118,7 @@
                     <div class="chat-box" style="height:100%;">
                         <div class="box box-primary direct-chat direct-chat-primary" style="height:100%;border-radius: 0">
                             <div id="panel-body" class="panel-body" style="height: 88%;">
-                                <div id="chat-list" class="direct-chat-messages">
+                                <div id="chat-list">
                                     <div class="direct-chat-msg" ng-class="msg.ai? '':'right'"
                                          ng-repeat="msg in conversation">
                                         <img class="direct-chat-img"
