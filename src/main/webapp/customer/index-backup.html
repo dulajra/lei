@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="/bootstrap/css/styles.css">
     <link rel="stylesheet" href="/bootstrap/css/chat.css">
     <script src="/bootstrap/js/jquery.js"></script>
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
     <!-- end Custom -->
 
 </head>
@@ -88,10 +89,12 @@
                     </div>
                     <!-- end Advertisement -->
                     <!-- Product display -->
-                    <div style="height: 80%;" ng-if="!addPriorityHigh">
+                    <div style="height: 80%; overflow: auto" ng-if="!addPriorityHigh">
                         <div class="col-md-3" ng-repeat="product in arrayobjects">
                             <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                                <span class="info-box-icon">
+                                    <img src="/dist/img/voice.png" width="100%" height="100%">
+                                </span>
 
                                 <div class="info-box-content">
                                     <span class="info-box-text">{{ product.name }}</span>
