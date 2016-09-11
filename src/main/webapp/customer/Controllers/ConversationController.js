@@ -46,18 +46,13 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
                 let interim_transcript = '';
 
                 for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    final_transcript = '';
+                    interim_transcript = '';
                     if (event.results[i].isFinal) {
                         final_transcript += event.results[i][0].transcript;
 
                         $('#chat-input').val(final_transcript);
-                        let tmp = final_transcript;
-                        $scope.customerMsg(tmp);
-                        $scope.fetchAiResponse(tmp);
-                        console.log("final: " + final_transcript);
-                        console.log("interim: " + interim_transcript);
-
-                        final_transcript = '';
-                        interim_transcript = '';
+                        $scope.sendClick();
                     } else {
                         interim_transcript += event.results[i][0].transcript;
                         $('#chat-input').val(interim_transcript);
@@ -152,6 +147,8 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
         if ($scope.inputMessage == undefined) return;
         $scope.customerMsg($scope.inputMessage);
         $scope.fetchAiResponse($scope.inputMessage);
+
+        $('#chat-input').val('');
     };
 
     $scope.keyUpEvent = function (event) {
