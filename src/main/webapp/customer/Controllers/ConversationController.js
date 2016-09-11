@@ -28,7 +28,7 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
                 $scope.$apply();
             }
         });
-        xhr.open("GET", "http://localhost:8080/lei-api/advertisement-management/get-ads");
+        xhr.open("GET", "/lei-api/advertisement-management/get-ads");
         xhr.send(data);
     };
 
@@ -118,7 +118,7 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
             }
         });
 
-        xhr.open("GET", "http://localhost:8080/lei-api/?query=" + query);
+        xhr.open("GET", "/lei-api/?query=" + query);
         xhr.setRequestHeader("content-type", "application/json");
 
         xhr.send(data);
@@ -164,9 +164,10 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
         setInterval(function () {
             if ($scope.addTimeout + 5000 < Date.now()) {
                 $scope.addPriorityHigh = true;
+                $scope.conversation = [];
                 $scope.$apply();
             }
-        }, 10000);
+        }, 20000);
     };
 
     $scope.markFloor = function (svgId) {
