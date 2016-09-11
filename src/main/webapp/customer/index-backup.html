@@ -42,34 +42,6 @@
     <script src="/bootstrap/js/jquery.js"></script>
     <!-- end Custom -->
 
-    <style>
-        .bottom-add-bar {
-            width: 75%;
-            height: 10%;
-            overflow-x: scroll;
-            white-space: nowrap;
-            bottom: 0;
-            position: fixed;
-        }
-
-        .bottom-add-image {
-            border: solid whitesmoke;
-            height: 100%;
-        }
-
-        ::-webkit-scrollbar {
-            display: none;
-        }
-
-        .add-image {
-            display: block;
-            margin: 0 auto;
-            /*max-width: 100%;*/
-            /*height: 50% !important;*/
-            /*height: 500px !important;*/
-        }
-    </style>
-
 </head>
 <body class="hold-transition skin-blue layout-top-nav full-screen" ng-controller="MainController">
 <div class="wrapper full-screen">
@@ -110,13 +82,9 @@
             <div class="row full-screen" ng-controller="ConversationController">
                 <div class="col-md-9" style="height:100%; padding-top: 10px;">
                     <!-- Advertisement -->
-                    <div style="height: 80%;" ng-if="addPriorityHigh">
-                        <div style="display: table;height: 100%;width: 100%;" >
-                            <div style="display: table-cell;vertical-align: middle;">
-                                <img class="add-image"
-                                     ng-src="{{ activeImage.encodedImage }}">
-                            </div>
-                        </div>
+                    <div style="height: 80%; width: 100%;" ng-if="addPriorityHigh">
+                            <img class="advertisement"
+                                 ng-src="{{ activeImage.encodedImage }}">
                     </div>
                     <!-- end Advertisement -->
                     <!-- Product display -->
@@ -134,11 +102,9 @@
                     </div>
                     <!-- end Product display -->
                     <!-- Advertisement preview -->
-                    <div style="height: 20%;">
-                        <div class="bottom-add-bar">
-                            <div class="img-responsive" style="display: inline;" ng-repeat="add in advertisements">
-                                <img class="bottom-add-image" ng-src="{{add.encodedImage}}">
-                            </div>
+                    <div style="height: 15%;">
+                        <div class="advertisement-preview" ng-repeat="add in advertisements" style="height: 100%;">
+                            <img height="100%" ng-src="{{add.encodedImage}}">
                         </div>
                     </div>
                     <!-- end Advertisement preview -->
