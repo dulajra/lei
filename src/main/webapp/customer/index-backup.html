@@ -109,7 +109,7 @@
             <div class="row full-screen" ng-controller="ConversationController">
                 <div class="col-md-9" style="height:100%; padding-top: 10px;">
                     <div style="height: 80%;" ng-if="addPriorityHigh">
-                        <div style="display: table;height: 100%;width: 100%;" >
+                        <div style="display: table;height: 100%;width: 100%;">
                             <div style="display: table-cell;vertical-align: middle;">
                                 <img class="add-image"
                                      ng-src="{{ activeImage.encodedImage }}">
@@ -138,8 +138,8 @@
                 </div>
                 <div class="col-md-3 no-padding no-margin" style="height:100%;">
                     <div class="chat-box" style="height:100%;">
-                        <div class="panel panel-primary" style="height:100%;">
-                            <div id="panel-body" class="panel-body" style="height: 85%;">
+                        <div class="box box-primary" style="height:100%;border-radius: 0">
+                            <div id="panel-body" class="panel-body" style="height: 88%;">
                                 <ul id="chat-list" class="chat">
                                     <div class="direct-chat-msg" ng-class="msg.ai? '':'right'"
                                          ng-repeat="msg in conversation">
@@ -152,16 +152,16 @@
                                     </div>
                                 </ul>
                             </div>
-                            <div class="panel-footer" style="height: 15%; padding: 5px;">
+                            <div class="box-footer" style="position: fixed;bottom: 0;">
                                 <div class="input-group">
-                                    <input id="chat-input" type="text" class="form-control input-sm"
+                                    <input id="chat-input" type="text" class="form-control"
                                            placeholder="Type your message here..." ng-model="inputMessage"
                                            ng-keyup="keyUpEvent($event)"/>
                                     <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat" ng-click="sendClick()">
-                                Send
-                            </button>
-                        </span>
+                                        <a class="btn btn-primary" id="btn-chat" ng-click="sendClick()">
+                                            <span class="fa fa-microphone"></span>
+                                        </a>
+                                    </span>
                                 </div>
                             </div>
                         </div>
