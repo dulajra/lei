@@ -50,27 +50,63 @@
         margin: 0;
         border-top: 5px solid black;
     }
+
+    .bottom-add-bar {
+        width: 75%;
+        height: 10%;
+        overflow-x: scroll;
+        white-space: nowrap;
+        bottom: 0;
+        position: fixed;
+    }
+
+    .bottom-add-image {
+        border: solid whitesmoke;
+        height: 100%;
+    }
+
+    .chat-box-lei {
+        background-color: #f0f0f0;
+        width: 25%;
+        height: 100%;
+        margin-left: 75%;
+        display: inline-block;
+        float: right;
+        bottom: 0;
+        position: fixed;
+    }
+
+    .add-image {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .item-region {
+        width: 75%;
+        display: table;
+        height: 90%;
+    }
+    ::-webkit-scrollbar {
+        display: none;
+    }
 </style>
 <body class="hold-transition" ng-controller="MainController">
 <div class="">
     <div class="" ng-controller="ConversationController">
-        <div ng-class="addPriorityHigh? 'col-md-9' :'col-md-4'"
-             style="display: table;height: 100%; background-color: #f0f0f0">
-            <div style="display: table-cell;vertical-align: middle;" id="myCarousel" class="carousel slide"
-                 data-ride="carousel">
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item" ng-class='{"active": $index==0}' ng-repeat="add in advertisements">
-                        <img class="img-responsive" ng-src="{{add.encodedImage}}" alt="Chania"
-                             style="display: block;margin: 0 auto; max-height: 100%; max-width: 100%">
-                    </div>
-                </div>
+        <div style="width: 75%;display: table;height: 90%;" ng-if="addPriorityHigh">
+            <div style="display: table-cell;vertical-align: middle;">
+                <img id="add-image-container" class="add-image" ng-src="{{ activeImage.encodedImage }}">
             </div>
         </div>
-        <div class="col-md-5" ng-if="!addPriorityHigh"
+        <div class="bottom-add-bar">
+            <div class="img-responsive" style="display: inline;" ng-repeat="add in advertisements">
+                <img class="bottom-add-image" ng-src="{{add.encodedImage}}">
+            </div>
+        </div>
+        <div class="item-region" ng-if="!addPriorityHigh"
              style="background-color: #f0f0f0; height: 100%;overflow-y: scroll">
             <div class="box-header">
-                <h2 style="text-align: center" ;>Item Details</h2>
+                <h2 style="text-align: center">Item Details</h2>
             </div>
             <hr>
             <div>
@@ -174,8 +210,8 @@
                 </svg>
             </div>
         </div>
-        <div class="col-md-3" style="background-color: #f0f0f0">
-            <div class="chat-box">
+        <div class="chat-box-lei">
+            <div>
                 <div class="panel panel-primary">
                     <div class="box-header">
                         <h2 style="text-align: center">Lei - DViana</h2>
@@ -183,7 +219,6 @@
                     <hr>
                     <div id="panel-body" class="panel-body" style="height: 80%;">
                         <ul id="chat-list" class="chat">
-                            <!--AI Message-->
                             <div class="direct-chat-msg" ng-class="msg.ai? '':'right'" ng-repeat="msg in conversation">
                                 <img class="direct-chat-img"
                                      ng-src="{{ msg.ai? '/dist/img/user1-128x128.jpg':'/dist/img/user3-128x128.jpg' }}"
@@ -199,7 +234,7 @@
                             <input id="chat-input" type="text" class="form-control input-sm"
                                    placeholder="Type your message here..." ng-model="inputMessage"
                                    ng-keyup="keyUpEvent($event)"/>
-                                <span class="input-group-btn">
+                            <span class="input-group-btn">
                             <button class="btn btn-warning btn-sm" id="btn-chat" ng-click="sendClick()">
                                 Send
                             </button>
@@ -210,13 +245,6 @@
             </div>
         </div>
     </div>
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.0
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="javascript:void(0);">Team DVios</a>.</strong> All rights
-        reserved.
-    </footer>
 </div>
 
 <script>
@@ -225,9 +253,9 @@
     //        var l = window.speechSynthesis.getVoices();
     //    };
 
-    speechSynthesis.getVoices().forEach(function (voice) {
-        alert(voice.name);
-    });
+    //    speechSynthesis.getVoices().forEach(function (voice) {
+    //        alert(voice.name);
+    //    });
 
 </script>
 

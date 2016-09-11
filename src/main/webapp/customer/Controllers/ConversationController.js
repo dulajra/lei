@@ -10,6 +10,8 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
     $scope.type = '';
     $scope.arrayobjects = [];
     $scope.location = false; // disable map display at the begining
+    $scope.activeImage = $scope.advertisements[0];
+    let activeImageIndex = 0;
 
     // Floor map props
     let selectedSVGColor = null;
@@ -188,4 +190,14 @@ angular.module("lei-admin").controller("ConversationController", function ($scop
     $scope.addPriorityExpire();
     $scope.updateAdds();
     $scope.start();
+
+    setInterval(function () {
+        if (activeImageIndex == $scope.advertisements.length - 1) {
+            activeImageIndex = 0;
+        } else {
+            activeImageIndex++;
+        }
+        $scope.activeImage = $scope.advertisements[activeImageIndex];
+        $scope.$apply();
+    }, 2000);
 });
